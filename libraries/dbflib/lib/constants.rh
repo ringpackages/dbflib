@@ -1,0 +1,59 @@
+/*
+**  constants.ring
+**  =============================================================
+**  Ring Library for Processing DBF and FPT Files
+**  (Visual FoxPro compatible)
+**  =============================================================
+*/
+
+# ===============================================================
+# Constants
+# ===============================================================
+
+C_DBF_VERSION_DBASE3        = 0x03
+C_DBF_VERSION_FOXPRO        = 0x30
+C_DBF_VERSION_FOXPRO_MEMO   = 0xF5
+C_DBF_VERSION_DBASE3_MEMO   = 0x83
+C_DBF_VERSION_DBASE4_MEMO   = 0x8B
+
+C_DBF_HEADER_TERMINATOR = 0x0D
+C_DBF_RECORD_ACTIVE     = 0x20
+C_DBF_RECORD_DELETED    = 0x2A
+C_DBF_EOF_MARKER        = 0x1A
+
+C_FPT_MEMO_TYPE         = 0x01
+
+# Code Pages — Visual FoxPro compatible
+C_CODEPAGE_NONE         = 0x00
+C_CODEPAGE_DOS_437      = 0x01
+C_CODEPAGE_DOS_850      = 0x02
+C_CODEPAGE_WIN_1252     = 0x03
+C_CODEPAGE_MAC_ROMAN    = 0x04
+C_CODEPAGE_DOS_865      = 0x08
+C_CODEPAGE_DOS_860      = 0x13
+C_CODEPAGE_DOS_863      = 0x14
+C_CODEPAGE_DOS_861      = 0x15
+C_CODEPAGE_DOS_852      = 0x64
+C_CODEPAGE_DOS_857      = 0x65
+C_CODEPAGE_DOS_737      = 0x66
+C_CODEPAGE_DOS_866      = 0x67
+C_CODEPAGE_DOS_862      = 0x68
+C_CODEPAGE_DOS_864      = 0x69
+C_CODEPAGE_DOS_775      = 0x6A
+C_CODEPAGE_DOS_874      = 0x6B
+C_CODEPAGE_WIN_1250     = 0x78
+C_CODEPAGE_WIN_1251     = 0x79
+C_CODEPAGE_WIN_1253     = 0x7A
+C_CODEPAGE_WIN_1254     = 0x7B
+C_CODEPAGE_WIN_1255     = 0x7C
+C_CODEPAGE_WIN_1256     = 0x7D
+C_CODEPAGE_WIN_1257     = 0x7E
+C_CODEPAGE_WIN_874      = 0x7F
+C_CODEPAGE_WIN_1252_ALT = 0xC8
+
+# Field descriptor sub-list positions (1-based, rule 4)
+FLD_NAME    = 1
+FLD_TYPE    = 2
+FLD_LEN     = 3
+FLD_DEC     = 4
+FLD_OFFSET  = 5

@@ -659,8 +659,6 @@ for i = 1 to len(aMap)
 next
 ```
 
-> **Note:** `toHashList()` is a deprecated alias for `toMapList()`.
-
 ---
 
 ### Structure

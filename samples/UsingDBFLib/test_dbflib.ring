@@ -472,7 +472,7 @@ func main
     ? "--- Test 21: Code page constant spot-check ---"
 
     assert(C_CODEPAGE_WIN_1252 = 0x03, "WIN_1252 = 0x03")
-    assert(C_CODEPAGE_WIN_1256 = 0x7D, "WIN_1256 = 0x7D")
+    assert(C_CODEPAGE_WIN_1256 = 0x7E, "WIN_1256 = 0x7E")
     assert(C_CODEPAGE_WIN_1251 = 0x79, "WIN_1251 = 0x79")
     assert(C_CODEPAGE_DOS_437  = 0x01, "DOS_437  = 0x01")
     assert(C_CODEPAGE_DOS_866  = 0x67, "DOS_866  = 0x67")

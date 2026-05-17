@@ -798,28 +798,66 @@ Common error messages:
 
 ## Code Page Reference
 
+Byte[29] values are sourced from **Microsoft VFP9 CPZERO.PRG** — the official
+VFP9 utility that writes codepage markers directly into DBF headers. All values
+have been verified to open silently in VFP9 without triggering the
+"Select Code Page" dialog (where applicable to the host OS).
+
+> **Note on OS-dependent codepages:** CP1255 (Hebrew) and CP1256 (Arabic) are
+> only shown in the VFP9 codepage dialog on their respective OS locales. A file
+> marked  (Hebrew) will open silently on a Hebrew Windows machine; a file
+> marked  (Arabic) will open silently on an Arabic Windows machine. The
+> byte values are correct regardless.
+
+> **UTF-8 is not supported.** The DBF format stores text in fixed-width fields;
+> variable-width encodings are incompatible with this structure. For Arabic text
+> use ; for Hebrew use .
+
+### No codepage marker
+
 | Constant | Value | Description |
 |---|---|---|
-| `C_CODEPAGE_NONE` | `0x00` | No code page |
+| `C_CODEPAGE_NONE` | `0x00` | No codepage — VFP will prompt on open |
+
+### MS-DOS codepages
+
+| Constant | Value | Description |
+|---|---|---|
 | `C_CODEPAGE_DOS_437` | `0x01` | DOS USA |
 | `C_CODEPAGE_DOS_850` | `0x02` | DOS International |
-| `C_CODEPAGE_WIN_1252` | `0x03` | Windows ANSI *(default)* |
-| `C_CODEPAGE_MAC_ROMAN` | `0x04` | Macintosh Roman |
-| `C_CODEPAGE_DOS_865` | `0x08` | DOS Nordic |
 | `C_CODEPAGE_DOS_852` | `0x64` | DOS Eastern European |
-| `C_CODEPAGE_DOS_857` | `0x65` | DOS Turkish |
-| `C_CODEPAGE_DOS_737` | `0x66` | DOS Greek |
-| `C_CODEPAGE_DOS_866` | `0x67` | DOS Russian |
-| `C_CODEPAGE_DOS_862` | `0x68` | DOS Hebrew |
-| `C_CODEPAGE_DOS_864` | `0x69` | DOS Arabic |
-| `C_CODEPAGE_WIN_1250` | `0x78` | Windows Central European |
-| `C_CODEPAGE_WIN_1251` | `0x79` | Windows Cyrillic |
-| `C_CODEPAGE_WIN_1253` | `0x7A` | Windows Greek |
-| `C_CODEPAGE_WIN_1254` | `0x7B` | Windows Turkish |
-| `C_CODEPAGE_WIN_1255` | `0x7C` | Windows Hebrew |
-| `C_CODEPAGE_WIN_1256` | `0x7D` | Windows Arabic |
-| `C_CODEPAGE_WIN_1257` | `0x7E` | Windows Baltic |
-| `C_CODEPAGE_WIN_874` | `0x7F` | Windows Thai |
+| `C_CODEPAGE_DOS_865` | `0x66` | DOS Nordic |
+| `C_CODEPAGE_DOS_866` | `0x65` | DOS Russian |
+| `C_CODEPAGE_DOS_861` | `0x67` | DOS Icelandic |
+| `C_CODEPAGE_DOS_857` | `0x6B` | DOS Turkish |
+| `C_CODEPAGE_DOS_737` | `0x6A` | DOS Greek |
+| `C_CODEPAGE_DOS_863` | `0x6C` | DOS French Canadian |
+
+### Macintosh codepages
+
+| Constant | Value | Description |
+|---|---|---|
+| `C_CODEPAGE_MAC_ROMAN` | `0x04` | Macintosh Roman |
+
+### Windows codepages
+
+| Constant | Value | Description |
+|---|---|---|
+| `C_CODEPAGE_WIN_1252` | `0x03` | Windows Western European (ANSI) *(default)* |
+| `C_CODEPAGE_WIN_874` | `0x7C` | Windows/DOS Thai |
+| `C_CODEPAGE_WIN_1250` | `0xC8` | Windows Central European |
+| `C_CODEPAGE_WIN_1251` | `0xC9` | Windows Cyrillic / Russian |
+| `C_CODEPAGE_WIN_1253` | `0xCB` | Windows Greek |
+| `C_CODEPAGE_WIN_1254` | `0xCA` | Windows Turkish |
+| `C_CODEPAGE_WIN_1255` | `0x7D` | Windows Hebrew *(Hebrew OS only)* |
+| `C_CODEPAGE_WIN_1256` | `0x7E` | Windows Arabic *(Arabic OS only)* |
+| `C_CODEPAGE_WIN_1257` | `0xCC` | Windows Baltic |
+
+### Codepages not supported by VFP9
+
+The following codepages have no official byte[29] assignment in VFP9 and are
+not included in the library: CP860 (Portuguese DOS), CP862 (Hebrew DOS),
+CP864 (Arabic DOS), CP775 (Baltic DOS).
 
 ---
 

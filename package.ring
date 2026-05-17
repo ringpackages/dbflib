@@ -5,11 +5,11 @@ aPackageInfo = [
 	:developer = "Mahmoud Fayed",
 	:email = "msfclipper@yahoo.com",
 	:license = "MIT License",
-	:version = "1.0.2",
+	:version = "1.0.3",
 	:ringversion = "1.26",
 	:versions = 	[
 		[
-			:version = "1.0.2",
+			:version = "1.0.3",
 			:branch = "master"
 		]
 	],
@@ -30,6 +30,7 @@ aPackageInfo = [
 		"libraries/dbflib/lib/dbffile.ring",
 		"samples/UsingDBFLib/test_dbflib.ring",
 		"samples/UsingDBFLib/test_performance.ring"
+		"samples/UsingDBFLib/test_codepages.ring"
 	],
 	:windowsfiles = 	[
 

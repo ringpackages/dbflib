@@ -471,11 +471,27 @@ func main
     ? ""
     ? "--- Test 21: Code page constant spot-check ---"
 
-    assert(C_CODEPAGE_WIN_1252 = 0x03, "WIN_1252 = 0x03")
-    assert(C_CODEPAGE_WIN_1256 = 0x7E, "WIN_1256 = 0x7E")
-    assert(C_CODEPAGE_WIN_1251 = 0x79, "WIN_1251 = 0x79")
-    assert(C_CODEPAGE_DOS_437  = 0x01, "DOS_437  = 0x01")
-    assert(C_CODEPAGE_DOS_866  = 0x67, "DOS_866  = 0x67")
+    # Values verified against Microsoft VFP9 CPZERO.PRG
+    assert(C_CODEPAGE_WIN_1252 = 0x03, "WIN_1252 = 0x03")   # Windows ANSI
+    assert(C_CODEPAGE_WIN_1256 = 0x7E, "WIN_1256 = 0x7E")   # Windows Arabic
+    assert(C_CODEPAGE_WIN_1257 = 0xCC, "WIN_1257 = 0xCC")   # Windows Baltic
+    assert(C_CODEPAGE_WIN_1255 = 0x7D, "WIN_1255 = 0x7D")   # Windows Hebrew
+    assert(C_CODEPAGE_WIN_1251 = 0xC9, "WIN_1251 = 0xC9")   # Windows Cyrillic
+    assert(C_CODEPAGE_WIN_1250 = 0xC8, "WIN_1250 = 0xC8")   # Windows Central European
+    assert(C_CODEPAGE_WIN_1253 = 0xCB, "WIN_1253 = 0xCB")   # Windows Greek
+    assert(C_CODEPAGE_WIN_1254 = 0xCA, "WIN_1254 = 0xCA")   # Windows Turkish
+    assert(C_CODEPAGE_WIN_874  = 0x7C, "WIN_874  = 0x7C")   # Windows/DOS Thai
+    assert(C_CODEPAGE_DOS_437  = 0x01, "DOS_437  = 0x01")   # DOS USA
+    assert(C_CODEPAGE_DOS_850  = 0x02, "DOS_850  = 0x02")   # DOS International
+    assert(C_CODEPAGE_DOS_852  = 0x64, "DOS_852  = 0x64")   # DOS East European
+    assert(C_CODEPAGE_DOS_866  = 0x65, "DOS_866  = 0x65")   # DOS Russian
+    assert(C_CODEPAGE_DOS_865  = 0x66, "DOS_865  = 0x66")   # DOS Nordic
+    assert(C_CODEPAGE_DOS_861  = 0x67, "DOS_861  = 0x67")   # DOS Iceland
+    assert(C_CODEPAGE_DOS_857  = 0x6B, "DOS_857  = 0x6B")   # DOS Turkish
+    assert(C_CODEPAGE_DOS_737  = 0x6A, "DOS_737  = 0x6A")   # DOS Greek
+    assert(C_CODEPAGE_DOS_863  = 0x6C, "DOS_863  = 0x6C")   # DOS French Canadian
+    assert(C_CODEPAGE_MAC_ROMAN = 0x04, "MAC_ROMAN = 0x04") # Macintosh Roman
+    assert(C_CODEPAGE_NONE     = 0x00, "NONE     = 0x00")   # No codepage
 
     # ===============================================================
     # Summary  (still a top-level statement — correct)

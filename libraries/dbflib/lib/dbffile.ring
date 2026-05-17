@@ -887,10 +887,6 @@ class DBFFile
 
         return aResult
 
-    # Deprecated alias — use toMapList() going forward
-    func toHashList
-        return toMapList()
-
     func getStructure
 
         aResult = []

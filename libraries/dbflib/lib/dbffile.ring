@@ -120,7 +120,6 @@ class DBFFile
 
     func create pPath, pFieldDefs
 
-        # Rule 6: cache len() before the loop
         nDefCount = len(pFieldDefs)
         if nDefCount = 0
             raise("DBFLib Error: No fields defined")
@@ -152,8 +151,6 @@ class DBFFile
                 nFLen = 4
             ok
 
-            # Rule 2: add() copies the list literal by value into aFields.
-            # We then immediately update aFields[x][FLD_DEC] in place.
             add(aFields, [cFName, cFType, nFLen, 0, nRecordSize])
 
             nFDefLen = len(pFieldDefs[x])
@@ -392,11 +389,10 @@ class DBFFile
         cRecordBuffer = copy(" ", nRecordSize)
 
         # Zero-initialise memo / binary / integer fields.
-        # Rule 6: nFieldCount is a cached class attribute — no len() call needed.
         for x = 1 to nFieldCount
             cFT = aFields[x][FLD_TYPE]
             if cFT = "M" or cFT = "G" or cFT = "I" or cFT = "B"
-                nStart = aFields[x][FLD_OFFSET] + 1   # Rule 4: 1-based offset
+                nStart = aFields[x][FLD_OFFSET] + 1   
                 nLen   = aFields[x][FLD_LEN]
                 cBefore = ""
                 if nStart > 1
@@ -612,7 +608,6 @@ class DBFFile
         ok
 
         # Collect surviving (non-deleted) record buffers.
-        # Rule 2: cRecordBuffer is a string; add() copies it by value — correct.
         aGoodRecs = []
         for x = 1 to nRecCount
             readRecord(x)
@@ -620,7 +615,6 @@ class DBFFile
                 add(aGoodRecs, cRecordBuffer)
             ok
         next
-        # Rule 6: cache len() after collection, before the write loop
         nGoodCount = len(aGoodRecs)
 
         # Copy the original header area into the temp file
@@ -701,7 +695,6 @@ class DBFFile
         if lModified flushRecord() ok
 
         # Collect the indices of all memo/G fields once
-        # Rule 6: nFieldCount cached as class attribute
         aMemoFieldIdx = []
         for f = 1 to nFieldCount
             cFT = aFields[f][FLD_TYPE]
@@ -839,12 +832,9 @@ class DBFFile
             nCurrentRec = x
             if lDeleted loop ok
             aRow = []
-            # Rule 6: nFieldCount is a cached class attribute
-            # getFieldValue() now handles memo fields transparently
             for y = 1 to nFieldCount
                 add(aRow, getFieldValue(y))
             next
-            # Rule 2: aRow copied by value into aResult
             add(aResult, aRow)
         next
 
@@ -869,7 +859,6 @@ class DBFFile
             if lDeleted loop ok
             aRow = []
             for y = 1 to nFieldCount
-                # Rule 2: [name, value] list added by value into aRow
                 add(aRow, [aFields[y][FLD_NAME], getFieldValue(y)])
             next
             add(aResult, aRow)
@@ -890,7 +879,6 @@ class DBFFile
         next
         return aResult
 
-    # Rule 3: "new DBFFile" without () — no init() is defined in DBFFile
     func copyStructure pNewPath
         oNew = new DBFFile
         return oNew.create(pNewPath, getStructure())
@@ -1038,7 +1026,7 @@ class DBFFile
 
             if len(cFieldData) < 32 exit ok
 
-            # Field name: positions 1-11 (1-based, rule 4), null-terminated
+            # Field name: positions 1-11 (1-based), null-terminated
             cTempName = ""
             for k = 1 to 11
                 if ascii(cFieldData[k]) = 0 exit ok
@@ -1055,7 +1043,6 @@ class DBFFile
                 nDec = 0
             ok
 
-            # Rule 2: list literal added by value — correct
             add(aFields, [upper(trim(cTempName)), cType, nLen, nDec, nRecordOffset])
 
             nRecordOffset += nLen
@@ -1125,7 +1112,6 @@ class DBFFile
     func buildFieldIndex
         aFieldIndex = []
         for x = 1 to nFieldCount
-            # Rule 2: [name, x] list added by value — correct
             add(aFieldIndex, [aFields[x][FLD_NAME], x])
         next
 
@@ -1146,7 +1132,6 @@ class DBFFile
             cRecordBuffer += copy(" ", nRecordSize - nBufLen)
         ok
 
-        # Rule 4: position 1 (1-based) is the deletion flag byte
         lDeleted  = (ascii(cRecordBuffer[1]) = C_DBF_RECORD_DELETED)
         lModified = false
 
@@ -1182,7 +1167,6 @@ class DBFFile
     func findFieldIndex pName
 
         cSearchName = upper(trim(pName))
-        # Rule 6: cache len() before the loop
         nIdxCount   = len(aFieldIndex)
         for x = 1 to nIdxCount
             if aFieldIndex[x][1] = cSearchName
@@ -1193,7 +1177,7 @@ class DBFFile
 
     func getRawFieldValue pIdx
 
-        nStart = aFields[pIdx][FLD_OFFSET] + 1   # Rule 4: +1 for 1-based string index
+        nStart = aFields[pIdx][FLD_OFFSET] + 1   # +1 for 1-based string index
         nLen   = aFields[pIdx][FLD_LEN]
         return substr(cRecordBuffer, nStart, nLen)
 
@@ -1361,7 +1345,6 @@ class DBFFile
         nPathLen  = len(cFilePath)
         cBase     = substr(cFilePath, 1, nPathLen - 4)
 
-        # Rule 6: cache the list length before the loop
         aExts     = [".fpt", ".FPT"]
         nExtCount = len(aExts)
 
@@ -1474,7 +1457,6 @@ class DBFFile
 
     func bytes2Short pBytes
         if len(pBytes) < 2 return 0 ok
-        # Rule 4: positions 1 and 2 (1-based)
         return ascii(pBytes[1]) + ascii(pBytes[2]) * 256
 
     func bytes2Long pBytes

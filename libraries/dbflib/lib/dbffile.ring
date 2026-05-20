@@ -1,5 +1,4 @@
 /*
-**  dbffile.ring
 **  =============================================================
 **  Ring Library for Processing DBF and FPT Files
 **  (Visual FoxPro compatible)
@@ -24,6 +23,7 @@ class DBFFile
 
     aFields         = []
     nFieldCount     = 0
+
     # aFieldIndex: list of [UPPERCASED_NAME, field_position] pairs,
     # built once by buildFieldIndex() after fields are loaded/created.
     aFieldIndex     = []

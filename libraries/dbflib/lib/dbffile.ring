@@ -5,7 +5,7 @@
 **  =============================================================
 */
 
-load "constants.rh"
+load again "constants.rh"
 
 class DBFFile
 
